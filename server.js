@@ -20,6 +20,10 @@ app.get("/survey", function(req, res) {
     res.sendFile(path.join(__dirname, "app/public/survey.html"));
   });
 
-  app.get("/test", function(req, res) {
-    console.log(friends);
+app.get("/questions", function(req, res) {
+    return res.json(questions);
+  });
+
+app.get("/friends", function(req, res) {
+    return res.json(friends);
   });

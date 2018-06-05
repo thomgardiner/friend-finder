@@ -12,8 +12,7 @@ app.get('/api/friends', function(req, res) {
   });
 
 app.post('/api/friends', function(req, res){
-  friends.push(req.body);
-  console.log("Hey! I did something!");
+    friends.push(req.body);
 });
 }
 

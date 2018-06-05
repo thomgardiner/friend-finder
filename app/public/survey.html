@@ -66,27 +66,53 @@
             let name = $("#name-input").val();
             let photo = $("#photo-input").val();
             let newPerson = {name: name, photo: photo, scores: []};
-            console.log(newPerson);
 
             for(i=0; i < qLength; i++){
                 let value = $('input[name="choice-' + i + '"]:checked').val();
                 newPerson.scores.push(parseInt(value));
             }
             
-            console.log(newPerson);
-
-            
             let friends = [];
+
             $.get("/api/friends", function(data){
                 for(i=0; i < data.length; i++){
                     friends.push(data[i]);
                 }
-            })
+
             
+            let topFriend = null;
+            let lowestDiff = 99;
+
+                for(i=0; i < friends.length; i++){
+                    let difference = 0;
+
+                    for(j=0; j < friends[i].scores.length; j++){
+                        let num1 = parseInt(newPerson.scores[j]);
+                        let num2 = parseInt(friends[i].scores[j]);
+        
+                        if(num1 > num2){
+                            difference += num1 - num2;
+                        }
+                        else{
+                            difference += num2 - num1;
+                        }
+                    }
+                
+                if(lowestDiff > difference){
+                        console.log("diff is " + difference)
+                        lowestDiff = difference;
+                        topFriend = friends[i];
+                        }
+                }
+
+
+            console.log("The top friend is: " + topFriend.name);
             let currentURL = window.location.origin;
             $.post(currentURL + "/api/friends", newPerson).then(function(){
                     console.log(data);
                     console.log("added!");
+
+            })
 	    });
     });
     </script>

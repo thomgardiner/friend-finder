@@ -9,9 +9,47 @@
     </head>
 <body>
         <p>Survey Page</p>
+    <div class="container">
+        <div class="row">
+                <div id="question-area" class="col-md-8 offset-md-2"></div>
+        </div>
+    </div>
     <script>
         $.get("/questions", function(data){
             console.log(data);
+            for(i=0; i < data.length; i++){
+                
+                //creates div and set attributes for the container that will hold the question
+                let questionContainer = $("<div>");
+                questionContainer.addClass("question-container");
+                questionContainer.attr("id", "c-" + i);
+
+                //creates the question div and appends it
+                let question = $("<div>");
+                question.addClass("question-box");
+                question.attr("id", "q-" + i);
+                question.html("<p>" + data[i].question);
+                
+                //appends everything to the container div
+                $("#question-area").append(questionContainer);
+                $("#c-" + i).append(question);
+
+                //creates container for input boxes
+                let checkboxArea = $("<div>");
+                checkboxArea.addClass("checkbox-area");
+                checkboxArea.attr("id", "cb-" + i);
+
+                $("#c-" + i).append(checkboxArea);
+
+                //creates input boxes
+                for(j=1; j < 6; j++){
+                    let checkbox = $("<label>");
+                    checkbox.addClass("checkbox");
+                    checkbox.html('<label class="checkbox-inline"><input type="checkbox" value="' + j + '">' + j + '</label>');
+                    $("#cb-" + i).append(checkbox);
+                }
+                
+            }
         });
     </script>
 </body>

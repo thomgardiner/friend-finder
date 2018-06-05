@@ -8,7 +8,7 @@ let questions = [
     {number: 7, question: "How much do you enjoy large cities?"},
     {number: 8, question: "How much do you enjoy small towns?"},
     {number: 9, question: "How likely are you to see a show?"},
-    {number: 10, question: "How much itenariry planning do you like to do beforehand?"}
+    {number: 10, question: "How much itinerary planning do you like to do beforehand?"}
 ]
 
 module.exports = questions;
